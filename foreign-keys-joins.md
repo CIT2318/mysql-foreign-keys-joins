@@ -1,4 +1,4 @@
-#MySQL - Multiple Tables, Foreign Keys and Joins
+#MySQL - Relationships, Foreign Keys and Joins
 This practical follows on from last week's. We will work with multiple tables and  implement a database based on the films example (Film, Certificate, Genre classes) from the lecture. First, have a look at the lecture slides so you are familiar with the class diagram, relationships and physical data model. 
 
 ##Creating the tables
@@ -164,139 +164,24 @@ SELECT films.title, certificates.name from films
 INNER JOIN certificates
 ON films.certificate_id=certificates.id;
 ```
-You should get a list of all the films and their certificates. Now have a go writing SELECT statements that will do the following:
+You should get a list of all the films and their certificates. Now have a go at writing SELECT statements that will do the following:
 * Display the titles of all the 15 rated films
-
-```
-SELECT films.title, certificates.name AS Certificate from films
-INNER JOIN certificates
-ON films.certificate_id=certificates.id
-WHERE certificates.name="15";
-```
-
 * Display all the 15 rated films that are less than 100 minutes in length
-
-```
-SELECT films.title, films.duration from films
-INNER JOIN certificates
-ON films.certificate_id=certificates.id
-WHERE certificates.name="15" AND films.duration<100;
-```
-
 * Display a list of all films and their genres
-
-```
-SELECT films.title, genres.name from films
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id;
-```
-
 * Display the genres associated with 'The Incredibles'
-
-```
-SELECT genres.name from films
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-WHERE films.title="The Incredibles";
-```
-
 * Display a list of all the comedy films
-
-```
-SELECT films.title, genres.name from films
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-WHERE genres.name="Comedy";
-```
-
 * Display a list of all films that are categorised as thriller or crime
-
-```
-SELECT films.title from films
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-WHERE genres.name IN ("Thriller", "Crime");
-```
-
 * Display the number of films classified under each certificate
-
-```
-SELECT certificates.name As Certificate, COUNT(certificates.name) AS 'No. films' from films
-INNER JOIN certificates
-ON films.certificate_id=certificates.id
-GROUP BY certificates.name;
-```
-
 * Display the number of films for each genre
-
-```
-SELECT genres.name AS Genre, COUNT(genres.name) AS 'No. films' from films
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-GROUP BY genres.name
-```
-
 * Display the complete details - certificate genres etc. for 'Dangerous Minds'
-
-```
-SELECT * from films
-INNER JOIN certificates
-ON films.certificate_id = certificates.id
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-WHERE films.title="Dangerous Minds"
-```
-
 * Display all the 15 rated films that are categorised as comedies
-
-```
-SELECT films.title from films
-INNER JOIN certificates
-ON films.certificate_id = certificates.id
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-WHERE certificates.name="15" AND genres.name="Comedy"
-```
-
 * Display the average duration of the films classified under each certificate. Order this list by duration from longest to shortest.
-
-```
-SELECT certificates.name, AVG(films.duration) AS 'Average Duration' from films
-INNER JOIN certificates
-ON films.certificate_id=certificates.id
-GROUP BY certificates.name
-ORDER BY duration DESC;
-```
-
-Display the number of films categorised under each genre
-
-```
-SELECT genres.name, COUNT(genres.name) AS 'No. of films' from films
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-GROUP BY genres.name;
-```
+* Display the number of films categorised under each genre
 
 ##Deleting data
 * Have a go at writing an SQL statement (or series of statements) that will delete a film from the database.
 
 ##On your own 
 * A lot of what we have done in the last two weeks using SQL can also be done using the phpmyadmin graphical user interface. Select the *films* table and have a go at the following:
-* * Click on the *insert* tab. See how you can use an HTML form to insert data into tables
-* * Click on *structure* and then *relations* and see how you edit the properties of foreign key relationships.  
+   * Click on the *insert* tab. See how you can use an HTML form to insert data into tables
+   * Click on *structure* and then *relations* and see how you edit the properties of foreign key relationships.  
