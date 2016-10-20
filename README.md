@@ -83,6 +83,7 @@ Run the following SQL command:
 ```
 INSERT INTO certificates (id, name, description, image) 
 VALUES 
+(NULL, 'U', 'Suitable for all', 'u-cert.png'), 
 (NULL, 'PG', 'Some scenes may be unsuitable for young children', 'pg-cert.png'), 
 (NULL, '12', 'Suitable for people aged 12 and over.', '12-cert.png'), 
 (NULL, '15', 'Suitable for people aged 15 and over.', '15-cert.png'), 
