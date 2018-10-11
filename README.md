@@ -101,18 +101,23 @@ ALTER TABLE films AUTO_INCREMENT = 1
 And now we can insert into the *films* table (note the additional foreign key value specifying the certificate for the films).
 
 ```sql
-INSERT INTO films (id, title, year, duration, certificate_id) VALUES
-(NULL, 'Jaws', 1975, 124, 4),
-(NULL, 'Winter''s Bone', 2010, 100, 4),
-(NULL, 'Do The Right Thing', 1989, 120, 4),
-(NULL, 'Mean Girls', 2004, 97, 4),
-(NULL, 'The Godfather', 1972, 177, 5),
-(NULL, 'Spirited Away', 2001, 124, 2),
-(NULL, 'The Thing', 1982, 109, 5),
-(NULL, 'The Incredibles', 2004, 115, 1),
-(NULL, 'Dangerous Minds', 1995, 99, 4),
-(NULL, 'Inception', 2004, 108, 3),
-(NULL, 'Donnie Darko', 2001, 113, 4);
+INSERT INTO `films` (`id`, `title`, `year`, `duration`, `certificate_id`) VALUES
+(1, 'Jaws', 1975, 124, 4),
+(2, 'Winter\'s Bone', 2010, 100, 4),
+(3, 'Do The Right Thing', 1989, 120, 4),
+(4, 'The Incredibles', 2004, 115, 1),
+(5, 'The Godfather', 1972, 177, 5),
+(6, 'Dangerous Minds', 1995, 99, 4),
+(7, 'Spirited Away', 2001, 124, 2),
+(8, 'Moonlight', 2016, 111, 5),
+(9, 'Life of PI', 2012, 127, 2),
+(10, 'Gravity', 2013, 91, 3),
+(11, 'Arrival', 2016, 116, 3),
+(12, 'Wonder Woman', 2017, 141, 3),
+(13, 'Mean Girls', 2004, 97, 4),
+(14, 'Inception', 2010, 108, 3),
+(15, 'Donnie Darko', 2001, 113, 4),
+(16, 'Get Out', 2017, 103, 4);
 ```
 * To make sure you understand how this works, try adding another film to the table.
 
@@ -120,42 +125,45 @@ INSERT INTO films (id, title, year, duration, certificate_id) VALUES
 Run the following SQL command.
 
 ```sql
-INSERT INTO genres (id, name, description) VALUES
-(NULL, 'Drama', 'Drama is a genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone, focusing on in-depth development of realistic characters who must deal with realistic emotional struggles.'),
-(NULL, 'Thriller', 'A Thriller is a story that is usually a mix of fear and excitement. It has traits from the suspense genre and often from the action, adventure or mystery genres, but the level of terror makes it borderline horror fiction at times as well. '),
-(NULL, 'Comedy', 'Comedy is a story that tells about a series of funny or comical events, intended to make the audience laugh.'),
-(NULL, 'Fantasy', 'A fantasy story is about magic or supernatural forces, rather than technology, though it often is made to include elements of other genres, such as science fiction elements, if it happens to take place in a modern or future era.'),
-(NULL, 'Crime', 'A crime story is about a crime that is being committed or was committed. It can also be an account of a criminal''s life. It often falls into the action or adventure genres.'),
-(NULL, 'Horror', 'A horror story is told to deliberately scare or frighten the audience, through suspense, violence or shock.');
+INSERT INTO `genres` (`id`, `name`, `description`) VALUES
+(1, 'Drama', 'Drama is a genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone, focusing on in-depth development of realistic characters who must deal with realistic emotional struggles.'),
+(2, 'Thriller', 'A Thriller is a story that is usually a mix of fear and excitement. It has traits from the suspense genre and often from the action, adventure or mystery genres, but the level of terror makes it borderline horror fiction at times as well. '),
+(3, 'Comedy', 'Comedy is a story that tells about a series of funny or comical events, intended to make the audience laugh.'),
+(4, 'Fantasy', 'A fantasy story is about magic or supernatural forces, rather than technology, though it often is made to include elements of other genres, such as science fiction elements, if it happens to take place in a modern or future era.'),
+(5, 'Crime', 'A crime story is about a crime that is being committed or was committed. It can also be an account of a criminal\'s life. It often falls into the action or adventure genres.'),
+(6, 'Horror', 'A horror story is told to deliberately scare or frighten the audience, through suspense, violence or shock.'),
+(7, 'Science Fiction', 'Science fiction (often shortened to Sci-Fi or SF) is a genre of speculative fiction, typically dealing with imaginative concepts such as advanced science and technology, spaceflight, time travel, and extraterrestrial life. ');
 ```
 
 ## Adding data to the *film_genre* table
 Finally we can add data to the *film_genre* table.
 
 ```sql
-INSERT INTO film_genre (film_id, genre_id) VALUES
+INSERT INTO `film_genre` (`film_id`, `genre_id`) VALUES
 (1, 2),
 (2, 1),
-(2, 5),
+(2, 2),
 (3, 1),
 (3, 3),
 (4, 1),
 (4, 3),
-(5, 1),
+(4, 4),
 (5, 5),
-(6, 4),
-(7, 2),
-(7, 6),
-(8, 3),
-(8, 4),
-(8, 2),
+(6, 1),
+(7, 4),
+(8, 1),
 (9, 1),
-(10, 2),
-(10, 4),
-(11, 1),
-(11, 4);
+(10, 7),
+(11, 7),
+(12, 4),
+(13, 1),
+(13, 3),
+(14, 2),
+(14, 7),
+(15, 1),
+(16, 6);
 ```
-Again, test your understanding by adding an additional row to this table.
+Again, test your understanding by adding some additional rows to this table.
 
 ## Getting data out using a join
 Run the following SQL statement
@@ -283,16 +291,6 @@ GROUP BY certificates.name
 ORDER BY duration DESC;
 ```
 
-Display the number of films categorised under each genre
-
-```sql
-SELECT genres.name, COUNT(genres.name) AS 'No. of films' from films
-INNER JOIN film_genre
-ON films.id=film_genre.film_id
-INNER JOIN genres
-ON film_genre.genre_id=genres.id
-GROUP BY genres.name;
-```
 
 ## Deleting data
 * Have a go at writing an SQL statement (or series of statements) that will delete a film from the database.
