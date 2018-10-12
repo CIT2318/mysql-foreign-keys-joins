@@ -163,7 +163,7 @@ INSERT INTO `film_genre` (`film_id`, `genre_id`) VALUES
 (15, 1),
 (16, 6);
 ```
-Again, test your understanding by adding some additional rows to this table.
+Again, test your understanding by adding some additional rows to this table to specify genres for the the new film you have added.
 
 ## Getting data out using a join
 Run the following SQL statement
